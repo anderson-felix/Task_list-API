@@ -19,7 +19,7 @@ export class createTasks1604526316073 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'user_id',
+            name: 'userId',
             type: 'integer',
             isNullable: false,
           },
@@ -49,8 +49,8 @@ export class createTasks1604526316073 implements MigrationInterface {
     );
 
     const foreignKey = new TableForeignKey({
-      columnNames: ['user_id'],
-      referencedColumnNames: ['id'],
+      columnNames: ['userId'],
+      referencedColumnNames: ['userId'],
       referencedTableName: 'users',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',

@@ -4,15 +4,17 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Task from './task';
 
 @Entity('users')
 export default class User {
-  @PrimaryGeneratedColumn()
-  @OneToMany((type) => Task, (tasks) => tasks.user_id)
-  id: Task;
+  @PrimaryGeneratedColumn('increment')
+  @OneToMany(() => Task, (tasks) => tasks.userId)
+  @JoinColumn({ name: 'userId' })
+  userId: number;
 
   @Column()
   name: string;
@@ -20,7 +22,7 @@ export default class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column() //
   password_hash: string;
 
   @CreateDateColumn()

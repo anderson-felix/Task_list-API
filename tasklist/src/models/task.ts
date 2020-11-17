@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import User from './user';
@@ -13,8 +14,9 @@ export default class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (users) => users.id)
-  user_id: User;
+  @ManyToOne(() => User, (users) => users.userId)
+  @JoinColumn({ name: 'userId' })
+  userId: User;
 
   @Column()
   task: string;

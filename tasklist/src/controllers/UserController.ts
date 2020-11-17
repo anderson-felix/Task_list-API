@@ -56,7 +56,7 @@ class UserController {
       Sucess: 'User Created!',
       userName: createUser.name,
       userEmail: createUser.email,
-      userId: createUser.id,
+      userId: createUser.userId,
     });
   }
   async update(req: Request, res: Response) {

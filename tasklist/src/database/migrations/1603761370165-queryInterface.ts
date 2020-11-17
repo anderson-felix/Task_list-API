@@ -7,7 +7,7 @@ export class queryInterface1603761370165 implements MigrationInterface {
         name: 'users',
         columns: [
           {
-            name: 'id',
+            name: 'userId',
             type: 'integer',
             unsigned: true,
             isPrimary: true,

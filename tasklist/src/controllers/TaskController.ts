@@ -12,26 +12,28 @@ class TaskController {
     });
 
     const { task } = req.body;
+    const { userId } = req;
 
     const userRepository = getRepository(User);
-    req.userId = userRepository.findOne({
-      where: { id: req.userId },
+    const user = await userRepository.findOne({
+      where: { userId },
     });
 
     const data = {
       task,
+      userId,
     };
-
     await schema.validate(data, { abortEarly: false });
 
     const taskRepository = getRepository(Task);
 
     const create = taskRepository.create(data);
     await taskRepository.save(create);
+    console.log(user);
 
     return res.json({
       id: create.id,
-      user_id: create.user_id,
+      user_id: create.userId,
       created_at: create.created_at,
       updated_at: create.update_at,
       task: create.task,
