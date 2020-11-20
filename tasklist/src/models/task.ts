@@ -14,7 +14,7 @@ export default class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (users) => users.userId)
+  @ManyToOne(() => User, (users) => users.id)
   @JoinColumn({ name: 'userId' })
   userId: User;
 

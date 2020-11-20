@@ -14,7 +14,7 @@ export default class User {
   @PrimaryGeneratedColumn('increment')
   @OneToMany(() => Task, (tasks) => tasks.userId)
   @JoinColumn({ name: 'userId' })
-  userId: number;
+  id: number;
 
   @Column()
   name: string;

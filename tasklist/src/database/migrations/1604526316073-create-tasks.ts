@@ -50,10 +50,11 @@ export class createTasks1604526316073 implements MigrationInterface {
 
     const foreignKey = new TableForeignKey({
       columnNames: ['userId'],
-      referencedColumnNames: ['userId'],
+      referencedColumnNames: ['id'],
       referencedTableName: 'users',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
+      name: 'tasks',
     });
     await queryRunner.createForeignKey('tasks', foreignKey);
   }

@@ -16,20 +16,24 @@ class TaskController {
 
     const userRepository = getRepository(User);
     const user = await userRepository.findOne({
-      where: { userId },
+      where: { id: userId },
     });
 
     const data = {
       task,
-      userId,
+      userId: user,
     };
     await schema.validate(data, { abortEarly: false });
+
+    if (!(userId || task)) {
+      return res.status(401).json({ error: 'Authentication error' });
+    }
 
     const taskRepository = getRepository(Task);
 
     const create = taskRepository.create(data);
-    await taskRepository.save(create);
-    console.log(user);
+    // await taskRepository.save(create);
+    console.log(create);
 
     return res.json({
       id: create.id,
