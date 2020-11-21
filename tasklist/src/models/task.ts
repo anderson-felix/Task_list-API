@@ -6,6 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { DateLocale } from 'yup';
 
 import User from './user';
 
@@ -21,7 +22,7 @@ export default class Task {
   @Column()
   task: string;
 
-  @Column()
+  @Column({ default: true, nullable: false })
   check: boolean;
 
   @CreateDateColumn()

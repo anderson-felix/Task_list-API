@@ -26,12 +26,13 @@ export class createTasks1604526316073 implements MigrationInterface {
           {
             name: 'task',
             type: 'text',
+            isNullable: false,
           },
           {
             name: 'check',
             type: 'boolean',
             isNullable: false,
-            default: false,
+            default: true,
           },
           {
             name: 'created_at',
@@ -49,12 +50,12 @@ export class createTasks1604526316073 implements MigrationInterface {
     );
 
     const foreignKey = new TableForeignKey({
+      name: 'tasks',
       columnNames: ['userId'],
       referencedColumnNames: ['id'],
       referencedTableName: 'users',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-      name: 'tasks',
     });
     await queryRunner.createForeignKey('tasks', foreignKey);
   }

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import sqlite3 from 'sqlite3';
 import * as Yup from 'yup';
 
 import Task from '../models/task';
@@ -31,17 +32,16 @@ class TaskController {
 
     const taskRepository = getRepository(Task);
 
-    const create = taskRepository.create(data);
-    // await taskRepository.save(create);
-    console.log(create);
+    const createTask = taskRepository.create(data);
+    await taskRepository.save(createTask);
 
     return res.json({
-      id: create.id,
-      user_id: create.userId,
-      created_at: create.created_at,
-      updated_at: create.update_at,
-      task: create.task,
-      check: create.check,
+      id: createTask.id,
+      user_id: createTask.userId,
+      created_at: createTask.created_at,
+      updated_at: createTask.update_at,
+      task: createTask.task,
+      check: createTask.check,
     });
   }
 }
