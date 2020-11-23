@@ -53,7 +53,7 @@ class UserController {
     await userRepository.save(createUser);
 
     return res.status(200).json({
-      Sucess: 'User Created!',
+      message: 'User Created!',
       userName: createUser.name,
       userEmail: createUser.email,
       userId: createUser.id,
