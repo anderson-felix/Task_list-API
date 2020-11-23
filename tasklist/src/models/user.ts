@@ -22,14 +22,14 @@ export default class User {
   @Column()
   email: string;
 
-  @Column() //
+  @Column()
   password_hash: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: String;
 
   @CreateDateColumn()
-  update_at: Date;
+  update_at: String;
 
   async checkPassword(password: string) {
     return await bcrypt.compare(password, this.password_hash);
