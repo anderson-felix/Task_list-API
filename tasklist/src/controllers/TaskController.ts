@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import sqlite3 from 'sqlite3';
 import * as Yup from 'yup';
 
 import Task from '../models/task';
@@ -15,6 +14,10 @@ class TaskController {
     const { task } = req.body;
     const { userId } = req;
 
+    if (!(userId || task)) {
+      return res.status(401).json({ error: 'Authentication error' });
+    }
+
     const userRepository = getRepository(User);
     const user = await userRepository.findOne({
       where: { id: userId },
@@ -25,10 +28,6 @@ class TaskController {
       userId: user,
     };
     await schema.validate(data, { abortEarly: false });
-
-    if (!(userId || task)) {
-      return res.status(401).json({ error: 'Authentication error' });
-    }
 
     const taskRepository = getRepository(Task);
 

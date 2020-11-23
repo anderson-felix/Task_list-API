@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
-import User from '../models/user';
 import authConfig from '../config/auth';
 
 declare module 'express' {
@@ -25,8 +24,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     const decoded: any = await promisify(jwt.verify)(token, authConfig.secret);
 
     req.userId = decoded.id;
-
-    console.log(req.userId);
 
     return next();
   } catch (err) {

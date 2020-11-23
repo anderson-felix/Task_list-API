@@ -24,17 +24,6 @@ export class createTasks1604526316073 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'task',
-            type: 'text',
-            isNullable: false,
-          },
-          {
-            name: 'check',
-            type: 'boolean',
-            isNullable: false,
-            default: true,
-          },
-          {
             name: 'created_at',
             type: 'datetime',
             isNullable: false,
@@ -42,6 +31,17 @@ export class createTasks1604526316073 implements MigrationInterface {
           {
             name: 'update_at',
             type: 'datetime',
+            isNullable: false,
+          },
+          {
+            name: 'check',
+            type: 'boolean',
+            isNullable: false,
+            default: false,
+          },
+          {
+            name: 'task',
+            type: 'text',
             isNullable: false,
           },
         ],

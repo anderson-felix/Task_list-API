@@ -6,8 +6,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { DateLocale } from 'yup';
-
 import User from './user';
 
 @Entity('tasks')
@@ -19,15 +17,21 @@ export default class Task {
   @JoinColumn({ name: 'userId' })
   userId: User;
 
-  @Column()
-  task: string;
-
-  @Column({ default: true, nullable: false })
-  check: boolean;
-
-  @CreateDateColumn()
+  @CreateDateColumn({
+    default:
+      new Date().toDateString() + ' - ' + new Date().toLocaleTimeString(),
+  })
   created_at: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    default:
+      new Date().toDateString() + ' - ' + new Date().toLocaleTimeString(),
+  })
   update_at: Date;
+
+  @Column({ default: false, nullable: false })
+  check: boolean;
+
+  @Column()
+  task: string;
 }
