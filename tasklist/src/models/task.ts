@@ -1,3 +1,4 @@
+import { json } from 'express';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import User from './user';
 
@@ -17,17 +19,11 @@ export default class Task {
   @JoinColumn({ name: 'userId' })
   userId: User;
 
-  @CreateDateColumn({
-    default:
-      new Date().toDateString() + ' - ' + new Date().toLocaleTimeString(),
-  })
-  created_at: Date;
+  @CreateDateColumn({ default: new Date().toLocaleString() })
+  created_at: string;
 
-  @CreateDateColumn({
-    default:
-      new Date().toDateString() + ' - ' + new Date().toLocaleTimeString(),
-  })
-  update_at: Date;
+  @UpdateDateColumn({ default: new Date().toLocaleString() })
+  update_at: string;
 
   @Column({ default: false, nullable: false })
   check: boolean;
