@@ -1,2 +1,2 @@
 # Task_list-API
- API with NodeJS, Express and TypeScript + jwt authentication
+ API with NodeJS, Express and jwt authentication
