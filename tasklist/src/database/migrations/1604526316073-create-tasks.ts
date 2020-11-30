@@ -25,12 +25,12 @@ export class createTasks1604526316073 implements MigrationInterface {
           },
           {
             name: 'created_at',
-            type: 'string',
+            type: 'datetime',
             isNullable: false,
           },
           {
             name: 'update_at',
-            type: 'string',
+            type: 'datetime',
             isNullable: false,
           },
           {
