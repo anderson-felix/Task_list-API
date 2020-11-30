@@ -2,12 +2,15 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   OneToMany,
   JoinColumn,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Task from './task';
+
+const date = new Date();
+const utc_offset = 180; // UTC Brasilia
+date.setMinutes(date.getMinutes() - utc_offset);
 
 @Entity('users')
 export default class User {
@@ -25,11 +28,11 @@ export default class User {
   @Column()
   password_hash: string;
 
-  @CreateDateColumn()
-  created_at: String;
+  @Column({ default: date.toJSON() })
+  created_at: string;
 
-  @CreateDateColumn()
-  update_at: String;
+  @Column({ default: date.toJSON() })
+  update_at: string;
 
   async checkPassword(password: string) {
     return await bcrypt.compare(password, this.password_hash);

@@ -1,14 +1,15 @@
-import { json } from 'express';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   ManyToOne,
   JoinColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import User from './user';
+
+const date = new Date();
+const utc_offset = 180; // UTC Brasilia
+date.setMinutes(date.getMinutes() - utc_offset);
 
 @Entity('tasks')
 export default class Task {
@@ -19,10 +20,10 @@ export default class Task {
   @JoinColumn({ name: 'userId' })
   userId: User;
 
-  @CreateDateColumn({ default: new Date().toLocaleString() })
+  @Column({ default: date.toJSON() })
   created_at: string;
 
-  @UpdateDateColumn({ default: new Date().toLocaleString() })
+  @Column({ default: date.toJSON() })
   update_at: string;
 
   @Column({ default: false, nullable: false })
