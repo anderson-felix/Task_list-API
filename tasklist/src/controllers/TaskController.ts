@@ -89,6 +89,10 @@ class TaskController {
       const task = await taskRepo.findOne({
         where: { id: taskId },
       });
+      if (task_id === 'all') {
+        await taskRepo.delete({});
+        return res.status(200).json({ message: 'All tasks as deleted' });
+      }
 
       if (task.userId !== req.userId) {
         return res.status(401).json({ error: 'Not authorized' });
