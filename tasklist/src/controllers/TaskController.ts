@@ -89,10 +89,6 @@ class TaskController {
       const task = await taskRepo.findOne({
         where: { id: taskId },
       });
-      if (task_id === 'all') {
-        await taskRepo.delete({});
-        return res.status(200).json({ message: 'All tasks as deleted' });
-      }
 
       if (task.userId !== req.userId) {
         return res.status(401).json({ error: 'Not authorized' });
@@ -103,6 +99,30 @@ class TaskController {
 
     await taskRepo.delete({ id: taskId });
     return res.status(200).json({ message: 'Deleted' });
+  }
+  async deleteAll(req: Request, res: Response) {
+    const { confirm } = req.body;
+    const taskRepo = getRepository(Task);
+    const user = taskRepo.findOne({
+      where: { id: req.userId },
+    });
+    const tasks = await taskRepo.find({
+      where: { userId: req.userId },
+    });
+
+    if (!confirm === true) {
+      return res.status(400).json({ message: 'Confirm to delete all tasks' });
+    }
+    if (!user) {
+      return res.status(401).json({ message: 'Token invalid' });
+    }
+    if (!tasks) {
+      return res.status(403).json({ message: 'Tasks not exists' });
+    }
+
+    await taskRepo.delete(tasks);
+
+    return res.status(200).json({ message: 'All tasks deleted' });
   }
 }
 
