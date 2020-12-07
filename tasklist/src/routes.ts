@@ -17,6 +17,7 @@ routes.post('/tasks', TaskController.store);
 routes.get('/tasks', TaskController.index);
 routes.put('/tasks/:task_id', TaskController.update);
 routes.delete('/tasks/:task_id', TaskController.delete);
+routes.delete('/tasks', TaskController.deleteAll);
 
 routes.put('/users', UserController.update);
 
